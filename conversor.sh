@@ -4,11 +4,7 @@
 
 printf "\033[4m%s\033[0m\n" "Conversor de unidades de longitud"
 
-<<<<<<< HEAD
 printf "\n1. Kilometros \n2. Hectometros \n3. Decametros \n4. Metros \n5. Decimetros \n6. Centimetros \n7. Milimetros \n\n"
-=======
-printf "\n1. Kilometros \n2. Hectometros \n3. Decametros \n4. Metros \n5. Decimetros \n6. Centimetros \n7. Milimetros \n\n\n"
->>>>>>> bb50e55 (conversor de unidades de longitud terminado)
 
 read -p "Ingrese la unidad origen:  " origen
 read -p "Ingrese la unidad destino:  " destino
