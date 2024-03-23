@@ -2,10 +2,12 @@
 
 #Conversor de unidades de longitud
 
+function conversor_de_longitud() {
+    
 
-printf "\033[4m%s\033[0m\n" "Conversor de unidades de longitud"
+printf "\e[1;33m\033[4m%s\033[0m\n" "Conversor de unidades de longitud"
 
-printf "\n1. Kilometros \n2. Hectometros \n3. Decametros \n4. Metros \n5. Decimetros \n6. Centimetros \n7. Milimetros \n\n"
+printf "\e[1;34m\n1. Kilometros \n2. Hectometros \n3. Decametros \n4. Metros \n5. Decimetros \n6. Centimetros \n7. Milimetros \n\n"
 
 read -p "Ingrese la unidad origen:  " origen
 read -p "Ingrese la unidad destino:  " destino
@@ -143,3 +145,25 @@ cx=$(echo "($valor*($destino2/$origen2))" | bc -l)
 
 #printf "\n $valor $texto1 = %.2f $cx $texto2 \n"
 printf "\n $valor $texto1 = %.2f $texto2 \n" $cx
+
+}
+
+
+#Menu principal
+
+printf "\n\e[1;31m\033[4m%s\033[0m\n" "Conversor de unidades"
+printf "\e[1;36m\n1. Conversor de unidades de Longitod\n2. Conversor de Unidades de Almacenamiento\n3. Conversor de Unidades de tiempo\n4. Conversor de Unidades de Masa\n6. Salir\n\n"
+
+read -p "Ingrese una opcion: " opc
+case $opc in
+
+    1)
+        {
+            conversor_de_longitud
+        }   
+        
+    ;;
+    *) exit 0
+    ;;
+
+esac
