@@ -4,7 +4,7 @@
 
 function conversor_de_longitud() {
     
-
+clear
 printf "\e[1;33m\033[4m%s\033[0m\n" "Conversor de unidades de longitud"
 
 printf "\e[1;34m\n1. Kilometros \n2. Hectometros \n3. Decametros \n4. Metros \n5. Decimetros \n6. Centimetros \n7. Milimetros \n\n"
@@ -149,34 +149,243 @@ printf "\n $valor $texto1 = %.2f $texto2 \n" $cx
 }
 
 
+#funcio para validar las variables de los while
+
+function validar_continuar()
+{
+    continuar=$1
+    
+    while [ $continuar -ne 1 ] && [ $continuar -ne 2 ]
+    do
+    read -p "La opcion seleccionada es invalida, ingrese 2 para continuar o 1 para salir.: " continuar
+    done
+    
+    return  $continuar
+}
+
 
 #Conversor de Unidades de Almacenamiento
+
+function conversor_de_almacenamiento()
+{
+
+    clear
+    printf "\e[1;33m\033[4m%s\033[0m\n" "Conversor de unidades de longitud"
+
+    printf "\e[1;34m\n1. bits \n2. bytes \n3. kilobytes \n4. megabytes \n5. gigabytes \n6. terabytes \n7. petabytes \n\n"
+
+        read -p "Ingrese la unidad origen:  " origen
+        read -p "Ingrese la unidad destino:  " destino
+        read -p "Ingrese la cantidad a convertir:  " valor
+
+
+        #validar el origen sea numerico
+
+        while ! [[ $origen =~ ^[0-9]+$ ]]; do
+            echo "Entrada invalida: $origen no es un valor numerico"
+            read -p "Ingrese la unidad origen debe estar entre 1 y 7: " origen
+        done
+
+        #validadar el destino sea numerico
+
+        while ! [[ $destino =~ ^[0-9]+$ ]]; do
+            echo "Entrada invalida: $destino no es un valor numerico"
+            read -p "Ingrese la unidad destino debe estar entre 1 y 7: " destino
+        done
+
+        # validar el valor sea numerico
+
+        while ! [[ $valor =~ ^[0-9]+$ ]]; do
+            echo "Entrada invalida: $valor no es un valor numerico o es menor que 0"
+            read -p "Ingrese el valor a convertir debe ser mayor a 0 y sea numerico: " valor
+        done
+
+
+
+        #validacion de los datos, se espera que sean numeros entre 1 y 7
+
+        while [ $origen -lt 1 -o $origen -gt 7 ] || [ $destino -lt 1 -o $destino -gt 7 ]
+        do
+            echo "Solo se permiten valores entre 1 y 7"
+            read -p "Ingrese la unidad origen:  " origen
+            read -p "Ingrese la unidad destino:  " destino
+            read -p "Ingrese la cantidad a convertir:  " valor
+        done
+
+
+
+
+        #se asignan los valores a convertir de las unidades, para aplicar la formula
+
+        bits=$(echo "1" | bc -l)
+        bytes=$(echo "1*8" | bc -l)
+        kilobytes=$(echo "1024*8" | bc -l)
+        megabytes=$(echo "1024*1024*8" | bc -l)
+        gigabytes=$(echo "1024*1024*1024*8" | bc -l)
+        terabytes=$(echo "1024*1024*1024*1024*8" | bc -l)
+        petabytes=$(echo "1024*1024*1024*1024*1024*8" | bc -l)
+
+        texto1="nada"
+
+        # Sea signa el valor de la unidad origen
+
+        if  [ $origen -eq 1 ];then
+
+            origen2=$bits
+            texto1="bit(s)"
+
+        elif [ $origen -eq 2 ];then
+
+            origen2=$bytes
+            texto1="Byte(s)"
+
+        elif [ $origen -eq 3 ];then
+
+            origen2=$kilobytes
+            texto1="Kilobyte(s)"
+
+        elif [ $origen -eq 4 ];then
+
+            origen2=$megabytes
+            texto1="Megabyte(s)"
+
+        elif [ $origen -eq 5 ];then
+
+            origen2=$gigabytes
+            texto1="Gigabyte(s)"
+
+        elif [ $origen -eq 6 ];then
+
+            origen2=$terabytes
+            texto1="Terabyte(s)"
+
+        elif [ $origen -eq 7 ];then
+
+            origen2=$petabytes
+            texto1="Petabyte(s)"
+        fi
+
+        # Sea signa el valor de la unidad origen
+
+        if  [ $destino -eq 1 ];then
+
+            destino2=$bits
+            texto2="Bit(s)"
+
+        elif [ $destino -eq 2 ];then
+
+            destino2=$bytes
+            texto2="Byte(s)"
+
+        elif [ $destino -eq 3 ];then
+
+            destino2=$kilobytes
+            texto2="Kilobyte(s)"
+
+        elif [ $destino -eq 4 ];then
+
+            destino2=$megabytes
+            texto2="Megabyte(s)"
+
+        elif [ $destino -eq 5 ];then
+
+            destino2=$gigabytes
+            texto2="Gigabyte(s)"
+
+        elif [ $destino -eq 6 ];then
+
+            destino2=$terabytes
+            texto2="Terabyte(s)"
+
+        elif [ $destino -eq 7 ];then
+
+            destino2=$petabytes
+            texto2="Petabyte(s)"
+
+        fi
+
+
+
+            cx=$(echo "($valor*($destino2/$origen2))" | bc -l)
+
+            #printf "\n $valor $texto1 = %.2f $cx $texto2 \n"
+            printf "\n $valor $texto1 = %.2f $texto2 \n" $cx
+
+}
+
+
+
+
+
+
+
+
+#funcio para validar las variables de los while
+
+function validar_continuar()
+{
+    continuar=$1
+    
+    while [ $continuar -ne 1 ] && [ $continuar -ne 2 ]
+    do
+    read -p "La opcion seleccionada es invalida, ingrese 2 para continuar o 1 para salir.: " continuar
+    done
+    
+    return  $continuar
+}
+
+
 
 
 
 
 #Menu principal
 
+
+#variable para el while principal
+
+Seguir=2
+
+#while principal
+
+while [ $Seguir -eq 2 ]
+do
+
 printf "\n\e[1;31m\033[4m%s\033[0m\n" "Conversor de unidades"
 printf "\e[1;36m\n1. Conversor de unidades de Longitod\n2. Conversor de Unidades de Almacenamiento\n3. Conversor de Unidades de tiempo\n4. Conversor de Unidades de Masa\n6. Salir\n\n"
 
 continuar=2
 
-read -p "Ingrese una opcion: " opc
+read -p "seleccione una opcion: " opc
+
+
 case $opc in
-
     1)
-        {
-            while [ $continuar -eq 2 ]
-
+        while [ $continuar -eq 2 ]
+        do
+            clear
             conversor_de_longitud
 
-            read -p "Desea realizar una nueva conversion? 2. Si 1. No: " continuar
+            read -p "Desea realizar una nueva conversion? ingrese 2 para continuar o 1 para salir.: " continuar
 
-        }   
-        
-    ;;
-    *) exit 0
-    ;;
+            continuar=validar_continuar $continuar
+        done
+        ;; 
+    2)
+        while [ $continuar -eq 2 ]
+        do
+            clear
+            conversor_de_almacenamiento
+            read -p "Desea realizar una nueva conversion? ingrese 2 para continuar o 1 para salir.: " continuar
 
+            continuar=validar_continuar $continuar
+        done
+        ;;
+    *) 
+        exit 0
+        ;;
 esac
+
+read -p "Desea realizar otra conversion? ingrese 2 para continuar o 1 para salir.: " Seguir
+clear   
+done
