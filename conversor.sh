@@ -457,7 +457,7 @@ function conversor_de_tiempo()
 
         elif [ $destino -eq 2 ];then
 
-            destino2=$minuto
+            destino2=$minutos
             texto2="Minuto(s)"
 
         elif [ $destino -eq 3 ];then
@@ -497,7 +497,7 @@ function conversor_de_tiempo()
             cx=$(echo "($valor*($origen2/$destino2))" | bc -l)
 
             #printf "\n $valor $texto1 = %.2f $cx $texto2 \n"
-            printf "\n $valor $texto1 = %.6f $texto2 \n" $cx
+            printf "\n $valor $texto1 = %.9f $texto2 \n" $cx
 
 }
 
