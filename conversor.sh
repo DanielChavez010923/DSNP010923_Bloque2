@@ -1,5 +1,7 @@
 #!/bin/bash
 
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------
 #Conversor de unidades de longitud
 
 function conversor_de_longitud() {
@@ -149,7 +151,11 @@ printf "\n $valor $texto1 = %.2f $texto2 \n" $cx
 }
 
 
-#funcio para validar las variables de los while
+#fin de conversor de longitud
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#funcion para validar las variables de los while
 
 function validar_continuar()
 {
@@ -163,6 +169,8 @@ function validar_continuar()
     return  $continuar
 }
 
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 # Inicio de Conversor de Unidades de Masa
@@ -219,14 +227,14 @@ function conversor_de_masa()
 
         #se asignan los valores a convertir de las unidades, para aplicar la formula
 
-        kilogramo=$(echo "0.001" | bc -l)
-        hectogramo=$(echo "0.01" | bc -l)
-        decagramo=$(echo "0.1" | bc -l)
+        kilogramo=$(echo "1000" | bc -l)
+        hectogramo=$(echo "100" | bc -l)
+        decagramo=$(echo "10" | bc -l)
         gramo=$(echo "1" | bc -l)
-        libra=$(echo "0.45359237" | bc -l)
-        decigramo=$(echo "10" | bc -l)
-        centigramo=$(echo "100" | bc -l)
-        miligramo=$(echo "1000" | bc -l)
+        libra=$(echo "453.59237" | bc -l)
+        decigramo=$(echo "0.1" | bc -l)
+        centigramo=$(echo "0.01" | bc -l)
+        miligramo=$(echo "0.001" | bc -l)
 
         texto1="nada"
 
@@ -320,17 +328,186 @@ function conversor_de_masa()
 
 
 
-            cx=$(echo "($valor*($destino2/$origen2))" | bc -l)
+            cx=$(echo "($valor*($origen2/$destino2))" | bc -l)
 
             #printf "\n $valor $texto1 = %.2f $cx $texto2 \n"
-            printf "\n $valor $texto1 = %.2f $texto2 \n" $cx
+            printf "\n $valor $texto1 = %.6f $texto2 \n" $cx
+
+}
+
+#Fin de conversor de masa
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#Conversor de Unidades de Tiempo
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+function conversor_de_tiempo()
+{
+
+    clear
+    printf "\e[1;33m\033[4m%s\033[0m\n" "Conversor de unidades de Tiempo"
+
+    printf "\e[1;34m\n1. Segundos \n2. Minutos \n3. Horas \n4. Dias \n5. Semanas \n6. Meses \n7. Anios \n8. Decadas \n\n"
+
+        read -p "Ingrese la unidad origen:  " origen
+        read -p "Ingrese la unidad destino:  " destino
+        read -p "Ingrese la cantidad a convertir:  " valor
+
+
+        #validar el origen sea numerico
+
+        while ! [[ $origen =~ ^[0-9]+$ ]]; do
+            echo "Entrada invalida: $origen no es un valor numerico"
+            read -p "Ingrese la unidad origen debe estar entre 1 y 7: " origen
+        done
+
+        #validadar el destino sea numerico
+
+        while ! [[ $destino =~ ^[0-9]+$ ]]; do
+            echo "Entrada invalida: $destino no es un valor numerico"
+            read -p "Ingrese la unidad destino debe estar entre 1 y 7: " destino
+        done
+
+        # validar el valor sea numerico
+
+        while ! [[ $valor =~ ^[0-9]+$ ]]; do
+            echo "Entrada invalida: $valor no es un valor numerico o es menor que 0"
+            read -p "Ingrese el valor a convertir debe ser mayor a 0 y sea numerico: " valor
+        done
+
+
+
+        #validacion de los datos, se espera que sean numeros entre 1 y 8
+
+        while [ $origen -lt 1 -o $origen -gt 8 ] || [ $destino -lt 1 -o $destino -gt 8 ]
+        do
+            echo "Solo se permiten valores entre 1 y 8"
+            read -p "Ingrese la unidad origen:  " origen
+            read -p "Ingrese la unidad destino:  " destino
+            read -p "Ingrese la cantidad a convertir:  " valor
+        done
+
+
+
+
+        #se asignan los valores a convertir de las unidades, para aplicar la formula
+
+        segundos=$(echo "1" | bc -l)
+        minutos=$(echo "60" | bc -l)
+        horas=$(echo "3600" | bc -l)
+        dias=$(echo "86400" | bc -l)
+        semanas=$(echo "604800" | bc -l)
+        meses=$(echo "2592000" | bc -l)
+        anios=$(echo "31536000" | bc -l)
+        decadas=$(echo "315360000" | bc -l)
+
+        texto1="nada"
+
+        # Sea signa el valor de la unidad origen
+
+        if  [ $origen -eq 1 ];then
+
+            origen2=$segundos
+            texto1="Segundo(s)"
+
+        elif [ $origen -eq 2 ];then
+
+            origen2=$minutos
+            texto1="Minuto(s)"
+
+        elif [ $origen -eq 3 ];then
+
+            origen2=$horas
+            texto1="Hora(s)"
+
+        elif [ $origen -eq 4 ];then
+
+            origen2=$dias
+            texto1="Dia(s)"
+
+        elif [ $origen -eq 5 ];then
+
+            origen2=$semanas
+            texto1="Semana(s)"
+
+        elif [ $origen -eq 6 ];then
+
+            origen2=$meses
+            texto1="Mes(s)"
+
+        elif [ $origen -eq 7 ];then
+
+            origen2=$anios
+            texto1="Anio(s)"
+
+        elif [ $origen -eq 8 ];then
+
+            origen2=$decadas
+            texto1="Decada(s)"
+        fi
+
+
+        # Sea signa el valor de la unidad origen
+
+        if  [ $destino -eq 1 ];then
+
+            destino2=$segundos
+            texto2="Segundo(s)"
+
+        elif [ $destino -eq 2 ];then
+
+            destino2=$minuto
+            texto2="Minuto(s)"
+
+        elif [ $destino -eq 3 ];then
+
+            destino2=$horas
+            texto2="Hora(s)"
+
+        elif [ $destino -eq 4 ];then
+
+            destino2=$dias
+            texto2="Dia(s)"
+
+        elif [ $destino -eq 5 ];then
+
+            destino2=$semanas
+            texto2="Semana(s)"
+
+        elif [ $destino -eq 6 ];then
+
+            destino2=$meses
+            texto2="Mes(s)"
+
+        elif [ $destino -eq 7 ];then
+
+            destino2=$anios
+            texto2="Anio(s)"
+
+        elif [ $destino -eq 8 ];then
+
+            destino2=$decadas
+            texto2="Decada(s)"
+
+        fi
+
+
+
+            cx=$(echo "($valor*($origen2/$destino2))" | bc -l)
+
+            #printf "\n $valor $texto1 = %.2f $cx $texto2 \n"
+            printf "\n $valor $texto1 = %.6f $texto2 \n" $cx
 
 }
 
 
 
+# fin del conversor de tiempo
 
-#Fin de conversor de masa
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 #Conversor de Unidades de Almacenamiento
 
@@ -520,7 +697,7 @@ while [ $Seguir -eq 2 ]
 do
 
 printf "\n\e[1;31m\033[4m%s\033[0m\n" "Conversor de unidades"
-printf "\e[1;36m\n1. Conversor de unidades de Longitod\n2. Conversor de Unidades de Almacenamiento\n3. Conversor de Unidades de tiempo\n4. Conversor de Unidades de Masa\n6. Salir\n\n"
+printf "\e[1;36m\n1. Conversor de unidades de Longitod\n2. Conversor de Unidades de Almacenamiento\n3. Conversor de Unidades de Masa\n4. Conversor de Unidades de Tiempo\n5. Salir\n\n"
 
 continuar=2
 
@@ -555,6 +732,18 @@ case $opc in
         do
             clear
             conversor_de_masa
+            read -p "Desea realizar una nueva conversion? ingrese 2 para continuar o 1 para salir.: " continuar
+
+            continuar= validar_continuar $continuar
+
+        done
+        ;;
+
+    4)
+        while [ $continuar -eq 2 ]
+        do
+            clear
+            conversor_de_tiempo
             read -p "Desea realizar una nueva conversion? ingrese 2 para continuar o 1 para salir.: " continuar
 
             continuar= validar_continuar $continuar
