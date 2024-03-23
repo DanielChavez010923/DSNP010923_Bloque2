@@ -149,17 +149,30 @@ printf "\n $valor $texto1 = %.2f $texto2 \n" $cx
 }
 
 
+
+#Conversor de Unidades de Almacenamiento
+
+
+
+
 #Menu principal
 
 printf "\n\e[1;31m\033[4m%s\033[0m\n" "Conversor de unidades"
 printf "\e[1;36m\n1. Conversor de unidades de Longitod\n2. Conversor de Unidades de Almacenamiento\n3. Conversor de Unidades de tiempo\n4. Conversor de Unidades de Masa\n6. Salir\n\n"
+
+continuar=2
 
 read -p "Ingrese una opcion: " opc
 case $opc in
 
     1)
         {
+            while [ $continuar -eq 2 ]
+
             conversor_de_longitud
+
+            read -p "Desea realizar una nueva conversion? 2. Si 1. No: " continuar
+
         }   
         
     ;;
