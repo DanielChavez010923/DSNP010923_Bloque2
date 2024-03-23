@@ -2,7 +2,7 @@
 
 #Conversor de unidades de longitud
 
-<<<<<<< HEAD
+
 printf "\033[4m%s\033[0m\n" "Conversor de unidades de longitud"
 
 printf "\n1. Kilometros \n2. Hectometros \n3. Decametros \n4. Metros \n5. Decimetros \n6. Centimetros \n7. Milimetros \n\n"
@@ -16,21 +16,21 @@ read -p "Ingrese la cantidad a convertir:  " valor
 
 while ! [[ $origen =~ ^[0-9]+$ ]]; do
     echo "Entrada invalida: $origen no es un valor numerico"
-    read -p "Ingrese la unidad origen: " origen
+    read -p "Ingrese la unidad origen debe estar entre 1 y 7: " origen
 done
 
 #validadar el destino sea numerico
 
 while ! [[ $destino =~ ^[0-9]+$ ]]; do
     echo "Entrada invalida: $destino no es un valor numerico"
-    read -p "Ingrese la unidad destino: " destino
+    read -p "Ingrese la unidad destino debe estar entre 1 y 7: " destino
 done
 
 # validar el valor sea numerico
 
 while ! [[ $valor =~ ^[0-9]+$ ]]; do
-    echo "Entrada invalida: $valor no es un valor numerico"
-    read -p "Ingrese la unidad destino: " valor
+    echo "Entrada invalida: $valor no es un valor numerico o es menor que 0"
+    read -p "Ingrese el valor a convertir debe ser mayor a 0 y sea numerico: " valor
 done
 
 
