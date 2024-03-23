@@ -164,6 +164,174 @@ function validar_continuar()
 }
 
 
+
+# Inicio de Conversor de Unidades de Masa
+
+
+function conversor_de_masa()
+{
+
+    clear
+    printf "\e[1;33m\033[4m%s\033[0m\n" "Conversor de unidades de Masa"
+
+    printf "\e[1;34m\n1. Kilogramos \n2. Hectogramos \n3. Decagramos \n4. Gramos \n5. libras \n6. Decigramos \n7. Centigramos \n8. Miligramos \n\n"
+
+        read -p "Ingrese la unidad origen:  " origen
+        read -p "Ingrese la unidad destino:  " destino
+        read -p "Ingrese la cantidad a convertir:  " valor
+
+
+        #validar el origen sea numerico
+
+        while ! [[ $origen =~ ^[0-9]+$ ]]; do
+            echo "Entrada invalida: $origen no es un valor numerico"
+            read -p "Ingrese la unidad origen debe estar entre 1 y 7: " origen
+        done
+
+        #validadar el destino sea numerico
+
+        while ! [[ $destino =~ ^[0-9]+$ ]]; do
+            echo "Entrada invalida: $destino no es un valor numerico"
+            read -p "Ingrese la unidad destino debe estar entre 1 y 7: " destino
+        done
+
+        # validar el valor sea numerico
+
+        while ! [[ $valor =~ ^[0-9]+$ ]]; do
+            echo "Entrada invalida: $valor no es un valor numerico o es menor que 0"
+            read -p "Ingrese el valor a convertir debe ser mayor a 0 y sea numerico: " valor
+        done
+
+
+
+        #validacion de los datos, se espera que sean numeros entre 1 y 8
+
+        while [ $origen -lt 1 -o $origen -gt 8 ] || [ $destino -lt 1 -o $destino -gt 8 ]
+        do
+            echo "Solo se permiten valores entre 1 y 8"
+            read -p "Ingrese la unidad origen:  " origen
+            read -p "Ingrese la unidad destino:  " destino
+            read -p "Ingrese la cantidad a convertir:  " valor
+        done
+
+
+
+
+        #se asignan los valores a convertir de las unidades, para aplicar la formula
+
+        kilogramo=$(echo "0.001" | bc -l)
+        hectogramo=$(echo "0.01" | bc -l)
+        decagramo=$(echo "0.1" | bc -l)
+        gramo=$(echo "1" | bc -l)
+        libra=$(echo "0.45359237" | bc -l)
+        decigramo=$(echo "10" | bc -l)
+        centigramo=$(echo "100" | bc -l)
+        miligramo=$(echo "1000" | bc -l)
+
+        texto1="nada"
+
+        # Sea signa el valor de la unidad origen
+
+        if  [ $origen -eq 1 ];then
+
+            origen2=$kilogramo
+            texto1="kilogramo(s)"
+
+        elif [ $origen -eq 2 ];then
+
+            origen2=$hectogramo
+            texto1="Hectogramo(s)"
+
+        elif [ $origen -eq 3 ];then
+
+            origen2=$decagramo
+            texto1="Decagramo(s)"
+
+        elif [ $origen -eq 4 ];then
+
+            origen2=$gramo
+            texto1="Gramo(s)"
+
+        elif [ $origen -eq 5 ];then
+
+            origen2=$libra
+            texto1="Libra(s)"
+
+        elif [ $origen -eq 6 ];then
+
+            origen2=$decigramo
+            texto1="Decigramo(s)"
+
+        elif [ $origen -eq 7 ];then
+
+            origen2=$centigramo
+            texto1="Centigramo(s)"
+
+        elif [ $origen -eq 8 ];then
+
+            origen2=$miligramo
+            texto1="Miligramo(s)"
+        fi
+
+
+        # Sea signa el valor de la unidad origen
+
+        if  [ $destino -eq 1 ];then
+
+            destino2=$kilogramo
+            texto2="Kilogramo(s)"
+
+        elif [ $destino -eq 2 ];then
+
+            destino2=$hectogramo
+            texto2="Hectogramo(s)"
+
+        elif [ $destino -eq 3 ];then
+
+            destino2=$decagramo
+            texto2="Decagramo(s)"
+
+        elif [ $destino -eq 4 ];then
+
+            destino2=$gramo
+            texto2="Gramo(s)"
+
+        elif [ $destino -eq 5 ];then
+
+            destino2=$libra
+            texto2="Libra(s)"
+
+        elif [ $destino -eq 6 ];then
+
+            destino2=$decigramo
+            texto2="Decigramo(s)"
+
+        elif [ $destino -eq 7 ];then
+
+            destino2=$centigramo
+            texto2="Centigramo(s)"
+
+        elif [ $destino -eq 8 ];then
+
+            destino2=$miligramo
+            texto2="Miligramo(s)"
+
+        fi
+
+
+
+            cx=$(echo "($valor*($destino2/$origen2))" | bc -l)
+
+            #printf "\n $valor $texto1 = %.2f $cx $texto2 \n"
+            printf "\n $valor $texto1 = %.2f $texto2 \n" $cx
+
+}
+
+
+
+
+#Fin de conversor de masa
+
 #Conversor de Unidades de Almacenamiento
 
 function conversor_de_almacenamiento()
@@ -381,6 +549,19 @@ case $opc in
             continuar= validar_continuar $continuar
         done
         ;;
+
+    3)
+        while [ $continuar -eq 2 ]
+        do
+            clear
+            conversor_de_masa
+            read -p "Desea realizar una nueva conversion? ingrese 2 para continuar o 1 para salir.: " continuar
+
+            continuar= validar_continuar $continuar
+
+        done
+        ;;
+
     *) 
         exit 0
         ;;
