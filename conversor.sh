@@ -143,25 +143,3 @@ cx=$(echo "($valor*($destino2/$origen2))" | bc -l)
 
 #printf "\n $valor $texto1 = %.2f $cx $texto2 \n"
 printf "\n $valor $texto1 = %.2f $texto2 \n" $cx
-=======
-
-echo "Conversor de unidades"
-echo "1 milimetros a centimetros"
-echo "2 centimetros a Metros"
-echo "3 Metros a decametros"
-echo "4 decametros a Hectometros"
-echo "5 Hectometros a Kilometros"
-
-read -p "ingrese su opcion: " opcion
-
-#Metro = 1
-#centimetro=$((Metro/10))
-
-if [ opcion -eq 1 ]
-   
-   then
-   read -p "Ingrese el valor a convertir" valor1
-   
-
-fi
->>>>>>> 4d3ee289498128ab3b472d21226b8355542cd388
