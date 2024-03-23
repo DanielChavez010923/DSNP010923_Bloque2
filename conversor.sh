@@ -170,7 +170,7 @@ function conversor_de_almacenamiento()
 {
 
     clear
-    printf "\e[1;33m\033[4m%s\033[0m\n" "Conversor de unidades de longitud"
+    printf "\e[1;33m\033[4m%s\033[0m\n" "Conversor de unidades de almacenamiento"
 
     printf "\e[1;34m\n1. bits \n2. bytes \n3. kilobytes \n4. megabytes \n5. gigabytes \n6. terabytes \n7. petabytes \n\n"
 
@@ -220,10 +220,10 @@ function conversor_de_almacenamiento()
         bits=$(echo "1" | bc -l)
         bytes=$(echo "1*8" | bc -l)
         kilobytes=$(echo "1024*8" | bc -l)
-        megabytes=$(echo "1024*1024*8" | bc -l)
-        gigabytes=$(echo "1024*1024*1024*8" | bc -l)
-        terabytes=$(echo "1024*1024*1024*1024*8" | bc -l)
-        petabytes=$(echo "1024*1024*1024*1024*1024*8" | bc -l)
+        megabytes=$(echo "(1024^2)*8" | bc -l)
+        gigabytes=$(echo "(1024^3)*8" | bc -l)
+        terabytes=$(echo "(1024^4)*8" | bc -l)
+        petabytes=$(echo "(1024^5)*8" | bc -l)
 
         texto1="nada"
 
@@ -306,10 +306,10 @@ function conversor_de_almacenamiento()
 
 
 
-            cx=$(echo "($valor*($destino2/$origen2))" | bc -l)
+            cx=$(echo "($valor*($origen2/$destino2))" | bc -l)
 
             #printf "\n $valor $texto1 = %.2f $cx $texto2 \n"
-            printf "\n $valor $texto1 = %.2f $texto2 \n" $cx
+            printf "\n $valor $texto1 = %.9f $texto2 \n" $cx
 
 }
 
@@ -368,7 +368,7 @@ case $opc in
 
             read -p "Desea realizar una nueva conversion? ingrese 2 para continuar o 1 para salir.: " continuar
 
-            continuar=validar_continuar $continuar
+            continuar= validar_continuar $continuar
         done
         ;; 
     2)
@@ -378,7 +378,7 @@ case $opc in
             conversor_de_almacenamiento
             read -p "Desea realizar una nueva conversion? ingrese 2 para continuar o 1 para salir.: " continuar
 
-            continuar=validar_continuar $continuar
+            continuar= validar_continuar $continuar
         done
         ;;
     *) 
@@ -386,6 +386,6 @@ case $opc in
         ;;
 esac
 
-read -p "Desea realizar otra conversion? ingrese 2 para continuar o 1 para salir.: " Seguir
+#read -p "Desea realizar otra conversion? ingrese 2 para continuar o 1 para salir.: " Seguir
 clear   
 done
