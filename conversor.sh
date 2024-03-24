@@ -7,9 +7,9 @@
 function conversor_de_longitud() {
     
 clear
-printf "\e[1;33m\033[4m%s\033[0m\n" "Conversor de unidades de longitud"
+printf "\e[1;31m\033[4m%s\033[0m\n" "Conversor de unidades de longitud"
 
-printf "\e[1;34m\n1. Kilometros \n2. Hectometros \n3. Decametros \n4. Metros \n5. Decimetros \n6. Centimetros \n7. Milimetros \n\n"
+printf "\e[1;36m\n1. Kilometros \n2. Hectometros \n3. Decametros \n4. Metros \n5. Decimetros \n6. Centimetros \n7. Milimetros \n\n"
 
 read -p "Ingrese la unidad origen:  " origen
 read -p "Ingrese la unidad destino:  " destino
@@ -180,9 +180,9 @@ function conversor_de_masa()
 {
 
     clear
-    printf "\e[1;33m\033[4m%s\033[0m\n" "Conversor de unidades de Masa"
+    printf "\e[1;31m\033[4m%s\033[0m\n" "Conversor de unidades de Masa"
 
-    printf "\e[1;34m\n1. Kilogramos \n2. Hectogramos \n3. Decagramos \n4. Gramos \n5. libras \n6. Decigramos \n7. Centigramos \n8. Miligramos \n\n"
+    printf "\e[1;36m\n1. Kilogramos \n2. Hectogramos \n3. Decagramos \n4. Gramos \n5. libras \n6. Decigramos \n7. Centigramos \n8. Miligramos \n\n"
 
         read -p "Ingrese la unidad origen:  " origen
         read -p "Ingrese la unidad destino:  " destino
@@ -346,9 +346,9 @@ function conversor_de_tiempo()
 {
 
     clear
-    printf "\e[1;33m\033[4m%s\033[0m\n" "Conversor de unidades de Tiempo"
+    printf "\e[1;31m\033[4m%s\033[0m\n" "Conversor de unidades de Tiempo"
 
-    printf "\e[1;34m\n1. Segundos \n2. Minutos \n3. Horas \n4. Dias \n5. Semanas \n6. Meses \n7. Anios \n8. Decadas \n\n"
+    printf "\e[1;36m\n1. Segundos \n2. Minutos \n3. Horas \n4. Dias \n5. Semanas \n6. Meses \n7. Anios \n8. Decadas \n\n"
 
         read -p "Ingrese la unidad origen:  " origen
         read -p "Ingrese la unidad destino:  " destino
@@ -515,9 +515,9 @@ function conversor_de_almacenamiento()
 {
 
     clear
-    printf "\e[1;33m\033[4m%s\033[0m\n" "Conversor de unidades de almacenamiento"
+    printf "\e[1;31m\033[4m%s\033[0m\n" "Conversor de unidades de almacenamiento"
 
-    printf "\e[1;34m\n1. bits \n2. bytes \n3. kilobytes \n4. megabytes \n5. gigabytes \n6. terabytes \n7. petabytes \n\n"
+    printf "\e[1;36m\n1. bits \n2. bytes \n3. kilobytes \n4. megabytes \n5. gigabytes \n6. terabytes \n7. petabytes \n\n"
 
         read -p "Ingrese la unidad origen:  " origen
         read -p "Ingrese la unidad destino:  " destino
@@ -697,7 +697,7 @@ while [ $Seguir -eq 2 ]
 do
 
 printf "\n\e[1;31m\033[4m%s\033[0m\n" "Conversor de unidades"
-printf "\e[1;36m\n1. Conversor de unidades de Longitod\n2. Conversor de Unidades de Almacenamiento\n3. Conversor de Unidades de Masa\n4. Conversor de Unidades de Tiempo\n5. Salir\n\n"
+printf "\e[1;36m\n1. Conversor de unidades de Longitud\n2. Conversor de Unidades de Almacenamiento\n3. Conversor de Unidades de Masa\n4. Conversor de Unidades de Tiempo\n5. Salir\n\n"
 
 continuar=2
 
