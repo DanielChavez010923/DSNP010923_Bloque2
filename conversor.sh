@@ -688,7 +688,7 @@ function validar_continuar()
 
 
 #variable para el while principal
-
+clear
 Seguir=2
 
 #while principal
@@ -751,7 +751,7 @@ case $opc in
         done
         ;;
 
-    *) 
+    *)     
         exit 0
         ;;
 esac
