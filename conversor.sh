@@ -54,13 +54,13 @@ done
 
 #se asignan los valores a convertir de las unidades, para aplicar la formula
 
-km=$(echo "0.001" | bc -l)
-hm=$(echo "0.01" | bc -l)
-dm=$(echo "0.1" | bc -l)
-m=$(echo "1" | bc -l)
-decim=$(echo "10" | bc -l)
-cm=$(echo "100" | bc -l)
-mm=$(echo "1000" | bc -l)
+km=$(awk 'BEGIN{print 0.001}')
+hm=$(awk 'BEGIN{print 0.01}')
+dm=$(awk 'BEGIN{print 0.1}')
+m=$(awk 'BEGIN{print 1}')
+decim=$(awk 'BEGIN{print 10}')
+cm=$(awk 'BEGIN{print 100}')
+mm=$(awk 'BEGIN{print 1000}')
 
 texto1="nada"
 
@@ -146,7 +146,7 @@ fi
 cx=$(echo "($valor*($destino2/$origen2))" | bc -l)
 
 #printf "\n $valor $texto1 = %.2f $cx $texto2 \n"
-printf "\n $valor $texto1 = %.2f $texto2 \n" $cx
+printf "\n $valor $texto1 = %.9f $texto2 \n" $cx
 
 }
 
@@ -227,14 +227,14 @@ function conversor_de_masa()
 
         #se asignan los valores a convertir de las unidades, para aplicar la formula
 
-        kilogramo=$(echo "1000" | bc -l)
-        hectogramo=$(echo "100" | bc -l)
-        decagramo=$(echo "10" | bc -l)
-        gramo=$(echo "1" | bc -l)
-        libra=$(echo "453.59237" | bc -l)
-        decigramo=$(echo "0.1" | bc -l)
-        centigramo=$(echo "0.01" | bc -l)
-        miligramo=$(echo "0.001" | bc -l)
+       kilogramo=$(awk 'BEGIN{print 1000}')
+       hectogramo=$(awk 'BEGIN{print 100}')
+       decagramo=$(awk 'BEGIN{print 10}')
+       gramo=$(awk 'BEGIN{print 1}')
+       libra=$(awk 'BEGIN{print 453.59237}')
+       decigramo=$(awk 'BEGIN{print 0.1}')
+       centigramo=$(awk 'BEGIN{print 0.01}')
+       miligramo=$(awk 'BEGIN{print 0.001}')
 
         texto1="nada"
 
@@ -393,14 +393,14 @@ function conversor_de_tiempo()
 
         #se asignan los valores a convertir de las unidades, para aplicar la formula
 
-        segundos=$(echo "1" | bc -l)
-        minutos=$(echo "60" | bc -l)
-        horas=$(echo "3600" | bc -l)
-        dias=$(echo "86400" | bc -l)
-        semanas=$(echo "604800" | bc -l)
-        meses=$(echo "2592000" | bc -l)
-        anios=$(echo "31536000" | bc -l)
-        decadas=$(echo "315360000" | bc -l)
+     segundos=$(awk 'BEGIN{print 1}')
+     minutos=$(awk 'BEGIN{print 60}')
+     horas=$(awk 'BEGIN{print 3600}')
+     dias=$(awk 'BEGIN{print 86400}')
+     semanas=$(awk 'BEGIN{print 604800}')
+     meses=$(awk 'BEGIN{print 2592000}')
+     anios=$(awk 'BEGIN{print 31536000}')
+     decadas=$(awk 'BEGIN{print 315360000}')
 
         texto1="nada"
 
@@ -562,13 +562,13 @@ function conversor_de_almacenamiento()
 
         #se asignan los valores a convertir de las unidades, para aplicar la formula
 
-        bits=$(echo "1" | bc -l)
-        bytes=$(echo "1*8" | bc -l)
-        kilobytes=$(echo "1024*8" | bc -l)
-        megabytes=$(echo "(1024^2)*8" | bc -l)
-        gigabytes=$(echo "(1024^3)*8" | bc -l)
-        terabytes=$(echo "(1024^4)*8" | bc -l)
-        petabytes=$(echo "(1024^5)*8" | bc -l)
+        bits=$(awk 'BEGIN{print 1}')
+        bytes=$(awk 'BEGIN{print 1*8}')
+        kilobytes=$(awk 'BEGIN{print 1024*8}')
+        megabytes=$(awk 'BEGIN{print (1024^2)*8}')
+        gigabytes=$(awk 'BEGIN{print (1024^3)*8}')
+        terabytes=$(awk 'BEGIN{print (1024^4)*8}')
+        petabytes=$(awk 'BEGIN{print (1024^5)*8}')
 
         texto1="nada"
 
@@ -701,7 +701,20 @@ printf "\e[1;36m\n1. Conversor de unidades de Longitud\n2. Conversor de Unidades
 
 continuar=2
 
-read -p "seleccione una opcion: " opc
+while true; do
+    read -p "Por favor ingresa un número del 1 al 5: " opc
+    if [[ $opc =~ ^[1-5]$ ]]; then
+        break
+    else
+        clear
+        printf "\n\e[1;31m\033[4m%s\033[0m\n" "Conversor de unidades"
+        printf "\e[1;36m\n1. Conversor de unidades de Longitud\n2. Conversor de Unidades de Almacenamiento\n3. Conversor de Unidades de Masa\n4. Conversor de Unidades de Tiempo\n5. Salir\n\n"
+
+        echo "El valor ingresado no es válido. Por favor ingresa un número del 1 al 5."
+    fi
+done
+
+
 
 
 case $opc in
