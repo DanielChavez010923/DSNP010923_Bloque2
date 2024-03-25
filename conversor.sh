@@ -143,10 +143,11 @@ fi
 
 
 
-cx=$(echo "($valor*($destino2/$origen2))" | bc -l)
+cx=$(awk "BEGIN {print ($valor*($destino2/$origen2))}")
 
 #printf "\n $valor $texto1 = %.2f $cx $texto2 \n"
 printf "\n $valor $texto1 = %.9f $texto2 \n" $cx
+
 
 }
 
@@ -328,7 +329,7 @@ function conversor_de_masa()
 
 
 
-            cx=$(echo "($valor*($origen2/$destino2))" | bc -l)
+            cx=$(awk "BEGIN {print ($valor*($origen2/$destino2))}")
 
             #printf "\n $valor $texto1 = %.2f $cx $texto2 \n"
             printf "\n $valor $texto1 = %.6f $texto2 \n" $cx
@@ -494,7 +495,7 @@ function conversor_de_tiempo()
 
 
 
-            cx=$(echo "($valor*($origen2/$destino2))" | bc -l)
+            cx=$(awk -v valor="$valor" -v origen2="$origen2" -v destino2="$destino2" 'BEGIN {print (valor*origen2/destino2)}')
 
             #printf "\n $valor $texto1 = %.2f $cx $texto2 \n"
             printf "\n $valor $texto1 = %.9f $texto2 \n" $cx
@@ -651,8 +652,8 @@ function conversor_de_almacenamiento()
 
 
 
-            cx=$(echo "($valor*($origen2/$destino2))" | bc -l)
-
+            
+            cx=$(awk "BEGIN {print ($valor*($origen2/$destino2))}")
             #printf "\n $valor $texto1 = %.2f $cx $texto2 \n"
             printf "\n $valor $texto1 = %.9f $texto2 \n" $cx
 
